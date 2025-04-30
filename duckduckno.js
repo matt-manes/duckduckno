@@ -27,7 +27,7 @@ function duckduckno () {
       if (elements[i].getAttribute('data-layout') == 'wikinlp')
         elements[i].remove()
       let subelements = elements[i].getElementsByClassName('react-module')
-      for (let j = 0; j < elements.length; ++j) {
+      for (let j = 0; j < subelements.length; ++j) {
         if (subelements[j].getAttribute('data-react-module-id') == 'wikinlp')
           subelements[j].remove()
       }
