@@ -5,7 +5,7 @@ function yeet (element) {
   element.style.display = 'none'
 }
 
-var intervalID = setInterval(duckduckno, 10)
+var duckducknoIntervalID = setInterval(duckduckno, 10)
 
 /* When value is `0`, `duckduckno()` gets executed at every interval.
 When the `window.onload` callback gets fired, value is set to `1`.
@@ -16,13 +16,13 @@ without the interval triggering as long as the page is open.
 Also ensures that the extension will fire even if `window.onload` is overwritten 
 at the expense of executing indefinitely (as opposed to clearing the interval in `window.onload`).
 */
-var sentinel = 0
+var duckducknoSentinel = 0
 
 function duckduckno () {
-  var elements = []
+  let elements = []
 
   //Chat and ai assist top bar buttons
-  var topbar = document.getElementById('react-duckbar')
+  let topbar = document.getElementById('react-duckbar')
   elements = topbar.getElementsByTagName('li')
   for (let i = 0; i < elements.length; ++i) {
     let text = elements[i].textContent.trim()
@@ -31,7 +31,7 @@ function duckduckno () {
 
   // Mainline and Sidebar ai
   elements = document.getElementsByTagName('section')
-  var sidebar, mainline
+  let sidebar, mainline
   for (let i = 0; i < elements.length; ++i) {
     let id = elements[i].getAttribute('data-testid')
     if (id == 'sidebar') {
@@ -68,13 +68,17 @@ function duckduckno () {
     yeet(elements[i])
   }
 
-  if (sentinel == 1) ++sentinel
-  else if (sentinel >= 2) {
-    clearInterval(intervalID)
+  // mobile chat button
+  let aiButton = document.getElementById('react-ai-button-slot')
+  if (aiButton != null) yeet(aiButton)
+
+  if (duckducknoSentinel == 1) ++duckducknoSentinel
+  else if (duckducknoSentinel >= 2) {
+    clearInterval(duckducknoIntervalID)
     console.log('Stopping duckduckno.')
   }
 }
 
 window.addEventListener('load', function () {
-  sentinel = 1
+  duckducknoSentinel = 1
 })
