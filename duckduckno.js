@@ -9,14 +9,14 @@ var duckducknoIntervalID = setInterval(duckduckno, 10)
 
 /* When value is `0`, `duckduckno()` gets executed at every interval.
 When the `window.onload` callback gets fired, value is set to `1`.
-At the end of `duckduckno()`, if the value is currently `1`, it'll be incremented.
-The function will execute one more time then clear the interval.
+At the end of `duckduckno()`, if the value is `1`, `afterLoadCallsCount` will be incremented.
+The function will execute `maxAfterLoadCalls` times then clear the interval.
 This allows elements to be hidden more or less as soon as they appear
 without the interval triggering as long as the page is open.
-Also ensures that the extension will fire even if `window.onload` is overwritten 
-at the expense of executing indefinitely (as opposed to clearing the interval in `window.onload`).
 */
 var duckducknoSentinel = 0
+var afterLoadCallsCount = 0
+var maxAfterLoadCalls = 10
 
 function duckduckno () {
   let elements = []
@@ -72,8 +72,8 @@ function duckduckno () {
   let aiButton = document.getElementById('react-ai-button-slot')
   if (aiButton != null) yeet(aiButton)
 
-  if (duckducknoSentinel == 1) ++duckducknoSentinel
-  else if (duckducknoSentinel >= 2) {
+  if (duckducknoSentinel == 1) ++afterLoadCallsCount
+  if (afterLoadCallsCount >= maxAfterLoadCalls) {
     clearInterval(duckducknoIntervalID)
     console.log('Stopping duckduckno.')
   }
