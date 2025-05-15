@@ -72,6 +72,13 @@ function duckduckno () {
   let aiButton = document.getElementById('react-ai-button-slot')
   if (aiButton != null) yeet(aiButton)
 
+  // Ads
+  elements = document.getElementsByTagName('li')
+  for (let i = 0; i < elements.length; ++i) {
+    if (elements[i].getAttribute('data-layout') == 'tours_ads')
+      yeet(elements[i])
+  }
+
   if (duckducknoSentinel == 1) ++afterLoadCallsCount
   if (afterLoadCallsCount >= maxAfterLoadCalls) {
     clearInterval(duckducknoIntervalID)
