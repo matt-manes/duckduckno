@@ -18,6 +18,19 @@ var duckducknoSentinel = 0
 var afterLoadCallsCount = 0
 var maxAfterLoadCalls = 10
 
+function yeetDuckBar () {
+  let elements = []
+
+  //Chat and ai assist top bar buttons
+  let topbar = document.getElementById('react-duckbar')
+  elements = topbar.getElementsByTagName('li')
+  for (let i = 0; i < elements.length; ++i) {
+    let text = elements[i].textContent.trim()
+    if (text == 'Assist' || text == 'Chat' || text == 'Duck.ai')
+      yeet(elements[i])
+  }
+}
+
 function duckduckno () {
   let elements = []
 
@@ -26,7 +39,8 @@ function duckduckno () {
   elements = topbar.getElementsByTagName('li')
   for (let i = 0; i < elements.length; ++i) {
     let text = elements[i].textContent.trim()
-    if (text == 'Assist' || text == 'Chat') yeet(elements[i])
+    if (text == 'Assist' || text == 'Chat' || text == 'Duck.ai')
+      yeet(elements[i])
   }
 
   // Mainline and Sidebar ai
