@@ -26,7 +26,12 @@ function yeetDuckBar () {
   elements = topbar.getElementsByTagName('li')
   for (let i = 0; i < elements.length; ++i) {
     let text = elements[i].textContent.trim()
-    if (text == 'Assist' || text == 'Chat' || text == 'Duck.ai')
+    if (
+      text == 'Assist' ||
+      text == 'Chat' ||
+      text == 'Duck.ai' ||
+      text == 'Search Assist'
+    )
       yeet(elements[i])
   }
 }
@@ -34,14 +39,7 @@ function yeetDuckBar () {
 function duckduckno () {
   let elements = []
 
-  //Chat and ai assist top bar buttons
-  let topbar = document.getElementById('react-duckbar')
-  elements = topbar.getElementsByTagName('li')
-  for (let i = 0; i < elements.length; ++i) {
-    let text = elements[i].textContent.trim()
-    if (text == 'Assist' || text == 'Chat' || text == 'Duck.ai')
-      yeet(elements[i])
-  }
+  yeetDuckBar()
 
   // Mainline and Sidebar ai
   elements = document.getElementsByTagName('section')
@@ -92,6 +90,9 @@ function duckduckno () {
     if (elements[i].getAttribute('data-layout') == 'tours_ads')
       yeet(elements[i])
   }
+
+  // Sometimes elements appear late
+  yeetDuckBar()
 
   if (duckducknoSentinel == 1) ++afterLoadCallsCount
   if (afterLoadCallsCount >= maxAfterLoadCalls) {
