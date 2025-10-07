@@ -7,17 +7,6 @@ function yeet (element) {
 
 var duckducknoIntervalID = setInterval(duckduckno, 10)
 
-/* When value is `0`, `duckduckno()` gets executed at every interval.
-When the `window.onload` callback gets fired, value is set to `1`.
-At the end of `duckduckno()`, if the value is `1`, `afterLoadCallsCount` will be incremented.
-The function will execute `maxAfterLoadCalls` times then clear the interval.
-This allows elements to be hidden more or less as soon as they appear
-without the interval triggering as long as the page is open.
-*/
-var duckducknoSentinel = 0
-var afterLoadCallsCount = 0
-var maxAfterLoadCalls = 10
-
 function yeetDuckBar () {
   let elements = []
 
@@ -91,16 +80,9 @@ function duckduckno () {
       yeet(elements[i])
   }
 
-  // Sometimes elements appear late
-  yeetDuckBar()
-
-  if (duckducknoSentinel == 1) ++afterLoadCallsCount
-  if (afterLoadCallsCount >= maxAfterLoadCalls) {
-    clearInterval(duckducknoIntervalID)
-    console.log('Stopping duckduckno.')
+  // Ask Duck.ai search drop
+  elements = document.getElementById('search_form').getElementsByTagName('li')
+  for (let i = 0; i < elements.length; ++i) {
+    if (elements[i].innerHTML.includes('Duck.ai')) yeet(elements[i])
   }
 }
-
-window.addEventListener('load', function () {
-  duckducknoSentinel = 1
-})
